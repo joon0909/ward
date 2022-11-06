@@ -30,10 +30,10 @@ const MainPage = ()=>{
             <h1 className="citeTitle">WARD</h1>
           </header>
           <main className="mainContent">
-
+            
           </main>
           <footer className="footerArea">
-            
+
           </footer>
         </article>
       </section>
