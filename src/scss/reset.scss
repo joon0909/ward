@@ -1,0 +1,70 @@
+@charset "utf-8";
+@font-face {
+  font-family: 'YdestreetB';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/YdestreetB.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+*{
+  font-size: 1vw;
+  font-family: "YdestreetB", sans-serif;
+  color: #333;
+  list-style-type: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+  background: transparent;
+  user-select: none;
+}
+html, body{
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+button, input[type="button"], input[type="submit"]{
+  cursor: pointer;
+}
+*::-webkit-scrollbar{ //스크롤바 안보이게
+  display:none;
+}
+blockquote, q {
+  quotes: none;
+}
+a, button {
+  cursor: pointer;
+}  
+p, span {
+  cursor: default;
+}
+p{
+  word-break: keep-all;
+}
+table, thead, tbody, th, td {
+  border-collapse: collapse;
+  border-spacing: 0;
+  cursor: default;
+}
+@mixin flexSetting($direction, $justify, $align) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+//포지션 설정시 정렬
+@mixin positionSetting($position, $top, $right, $bottom, $left, $trans){
+  position: $position;
+  top: $top;
+  right: $right;
+  left: $left;
+  bottom: $bottom;
+  transform: $trans;
+}
+//백그라운드 이미지 설정
+@mixin backgroundSetting($url, $size, $position, $repeat){
+  background-image: $url;
+  background-size: $size;
+  background-position: $position;
+  background-repeat: $repeat;
+}
