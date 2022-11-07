@@ -59,6 +59,47 @@ app.post("/loginCheck", function (req, res) {
     });
   });
 });
+app.post("/join", function (req, res) {
+  var data = [];
+
+  for (var joinValue in req.body) {
+    if (req.body[joinValue] == '') {
+      data.push(joinValue);
+    }
+
+    ;
+  }
+
+  if (data.length == 0) {
+    dbCon.connect(function () {
+      var sqlStr = "select * from WARD_USER where w_id = '" + req.body.joinId + "'";
+      dbCon.query(sqlStr, function (err, result) {
+        if (result[0] == undefined) {
+          sqlStr = "insert into WARD_USER values(".concat(null, ", \"", req.body.joinId, "\", \"").concat(req.body.joinPass, "\", \"").concat(req.body.joinName, "\", \"").concat(req.body.joinPhone, "\", \"").concat(req.body.joinEmail, "\")");
+          dbCon.query(sqlStr, function (err, result) {
+            res.send({
+              check: "joinSuccess",
+              message: "회원가입이 완료되었습니다."
+            });
+          });
+        } else {
+          res.send({
+            check: "idUsed",
+            message: "이미 사용중인 아이디입니다."
+          });
+        }
+
+        ;
+      });
+    });
+  } else {
+    res.send({
+      check: "checkCont",
+      message: "입력되지 않은 정보가 있습니다.",
+      notInput: data
+    });
+  }
+});
 app.listen(3000, function (err) {
   if (err) throw err;
   console.log("3000 port connect");

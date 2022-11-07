@@ -24,8 +24,47 @@
   width: 100vw;
   height: 100vh;
   background-color: #111;
-  // transform: translateX(100%);
+  transform: translateX(100%);
   position: absolute;
+  transition: all 0.8s ease;
+  .joinMessage{
+    width: 30%;
+    height: 15%;
+    border-radius: 5vh;
+    background-color: white;
+    border: 0.2rem solid #111;
+    @include positionSetting(absolute, 50%, none, none, 50%, translate(-50%, -50%));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    box-shadow: 0rem 0rem 0.2rem 0.1rem white;
+    pointer-events: none;
+    p{
+      color: #111;
+      font-size: 1.7rem; 
+      pointer-events: none;
+    }
+  }
+  .usedIdMessage{
+    width: 30%;
+    height: 15%;
+    border-radius: 5vh;
+    background-color: white;
+    border: 0.2rem solid #111;
+    @include positionSetting(absolute, 50%, none, none, 50%, translate(-50%, -50%));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    box-shadow: 0rem 0rem 0.2rem 0.1rem white;
+    pointer-events: none;
+    p{
+      color: #111;
+      font-size: 1.7rem; 
+      pointer-events: none;
+    }
+  }
   .joinForm{
     width: 40%;
     height: 80%;
@@ -145,6 +184,10 @@
           display: flex;
           align-items: center;
           padding-left: 10%;
+          h6{
+            font-size: 0.8rem;
+            color: lightgray;
+          }
         }
         #loginInputId{
           width: 80%;

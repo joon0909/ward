@@ -95,7 +95,79 @@ table, thead, tbody, th, td {
   width: 100vw;
   height: 100vh;
   background-color: #111;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
   position: absolute;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+}
+
+.joinArea .joinMessage {
+  width: 30%;
+  height: 15%;
+  border-radius: 5vh;
+  background-color: white;
+  border: 0.2rem solid #111;
+  position: absolute;
+  top: 50%;
+  right: none;
+  left: 50%;
+  bottom: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  z-index: 1000;
+  -webkit-box-shadow: 0rem 0rem 0.2rem 0.1rem white;
+          box-shadow: 0rem 0rem 0.2rem 0.1rem white;
+  pointer-events: none;
+}
+
+.joinArea .joinMessage p {
+  color: #111;
+  font-size: 1.7rem;
+  pointer-events: none;
+}
+
+.joinArea .usedIdMessage {
+  width: 30%;
+  height: 15%;
+  border-radius: 5vh;
+  background-color: white;
+  border: 0.2rem solid #111;
+  position: absolute;
+  top: 50%;
+  right: none;
+  left: 50%;
+  bottom: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  z-index: 1000;
+  -webkit-box-shadow: 0rem 0rem 0.2rem 0.1rem white;
+          box-shadow: 0rem 0rem 0.2rem 0.1rem white;
+  pointer-events: none;
+}
+
+.joinArea .usedIdMessage p {
+  color: #111;
+  font-size: 1.7rem;
+  pointer-events: none;
 }
 
 .joinArea .joinForm {
@@ -304,6 +376,11 @@ table, thead, tbody, th, td {
       -ms-flex-align: center;
           align-items: center;
   padding-left: 10%;
+}
+
+.loginPage .loginArea .loginForm .inputArea .inputIdLabel h6, .loginPage .loginArea .loginForm .inputArea .inputPassLabel h6 {
+  font-size: 0.8rem;
+  color: lightgray;
 }
 
 .loginPage .loginArea .loginForm .inputArea #loginInputId, .loginPage .loginArea .loginForm .inputArea #loginInputPass {

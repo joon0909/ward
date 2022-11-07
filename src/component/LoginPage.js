@@ -60,7 +60,53 @@ const LoginPage = (props)=>{
   }
   const joinSubmit = (e)=>{
     e.preventDefault();
-
+    console.log($("#joinId").val());
+    let body = {
+      joinId : $("#joinId").val(),
+      joinPass : $("#joinPass").val(),
+      joinName : $("#joinName").val(),
+      joinPhone : $("#joinPhone").val(),
+      joinEmail : $("#joinEmail").val()
+    };
+    axios({
+      url: "/join",
+      method: "post",
+      data: body
+    }).then((response)=>{
+      console.log(response.data)
+      switch(response.data.check){
+        case "checkCont":
+          response.data["notInput"].forEach((v)=>{
+            $(`#${v}`).css({"border":"0.2rem solid crimson", "box-shadow":"inset 0 0 0 0.2rem crimson"});
+            let tossV = v;
+            setTimeout(()=>{
+              $(`#${tossV}`).css({"border":"0.2rem solid #111", "box-shadow":"0 0 0 0 white"});
+            }, 3000);
+          });
+          break;
+        case "idUsed":
+          $(".joinArea").append("<div class='usedIdMessage'><p>이미 사용중인 아이디입니다.</p></div>");
+          setTimeout(()=>{
+            $(".usedIdMessage").remove();
+          }, 2000);
+          break;
+        case "joinSuccess":
+          $(".joinArea").append("<div class='joinMessage'><p>회원가입에 성공하였습니다.</p></div>");
+          setTimeout(()=>{
+            $(".joinMessage").remove();
+            backMain();
+          }, 2000); 
+          break;
+        default:
+          break;    
+      }
+    });
+  }
+  const joinClick = (e)=>{
+    $(".joinArea").css({"transform":"translateX(0)"});
+  }
+  const backMain = (e)=>{
+    $(".joinArea").css({"transform":"translateX(100%)"});
   }
   return (
     <>
@@ -71,14 +117,14 @@ const LoginPage = (props)=>{
           <form className="loginForm" onSubmit={loginSubmit}>
             <h1 className="loginTitle">WARD</h1>
             <div className="inputArea">
-              <label className="inputIdLabel" htmlFor="loginInputId">ID</label>
+              <label className="inputIdLabel" htmlFor="loginInputId">ID<h6>(sampleID:master)</h6></label>
               <input id="loginInputId" type="text" name="inputId" maxLength="8" autoComplete="off" value={inputId} onChange={onInputIdHandler}></input>
-              <label className="inputPassLabel" htmlFor="loginInputPass">PASS</label>
+              <label className="inputPassLabel" htmlFor="loginInputPass">PASS<h6>(samplePASS:1234)</h6></label>
               <input id="loginInputPass" type="password" name="inputPass" maxLength="8" value={inputPass} onChange={onInputPassHandler}></input>
               <button className="loginSubmit" type="submit">Login</button>
             </div>
             <div className="buttonArea">
-              <div className="joinButton">회원가입</div>
+              <div className="joinButton" onClick={joinClick}>회원가입</div>
               <div className="findButton">회원정보 찾기</div>
             </div>
           </form>
@@ -87,7 +133,7 @@ const LoginPage = (props)=>{
           <p>입력된 회원 정보에 일치하는 회원이 없습니다.</p>
         </article>
         <article className="joinArea">
-          <div className="backIcon"></div>
+          <div className="backIcon" onClick={backMain}></div>
           <form className="joinForm" onSubmit={joinSubmit}>
             <h1>WARD</h1>
             <div className="joinBox">
