@@ -9,7 +9,7 @@ const intro = ()=>{
 const menuTextHover = (e)=>{
   e.preventDefault();
   {/**리액트는 이벤트핸들러를 인라인방식으로 해야함 */}
-  $(".menuArea").css({"box-shadow":"inset 0rem 10rem 0 10rem #111"});
+  $(".menuArea").css({"box-shadow":"inset 0rem 0rem 0 10rem #111"});
   $(".menuText").css("color", "#333");
   $(e.target).css("color", "white");
   switch(e.target.id){

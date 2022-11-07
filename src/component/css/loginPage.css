@@ -59,6 +59,137 @@ table, thead, tbody, th, td {
   cursor: default;
 }
 
+.loginFailMessage {
+  width: 30%;
+  height: 25%;
+  border-radius: 10vh;
+  background-color: white;
+  border: 0.2rem solid #111;
+  position: absolute;
+  top: 50%;
+  right: none;
+  left: 50%;
+  bottom: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  z-index: 1000;
+  -webkit-box-shadow: 0rem 0rem 0.2rem 0.1rem white;
+          box-shadow: 0rem 0rem 0.2rem 0.1rem white;
+  pointer-events: none;
+}
+
+.loginFailMessage p {
+  color: #111;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+.joinArea {
+  width: 100vw;
+  height: 100vh;
+  background-color: #111;
+  position: absolute;
+}
+
+.joinArea .joinForm {
+  width: 40%;
+  height: 80%;
+  border: 0.2rem solid #fff;
+  -webkit-box-shadow: 0 0 0.3rem 0.2rem #333;
+          box-shadow: 0 0 0.3rem 0.2rem #333;
+  border-radius: 5vh;
+  position: absolute;
+  top: 50%;
+  right: none;
+  left: 50%;
+  bottom: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.joinArea .joinForm h1 {
+  color: #111;
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+.joinArea .joinForm .joinBox {
+  width: 80%;
+  height: 20%;
+}
+
+.joinArea .joinForm .joinBox label {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  text-align: left;
+}
+
+.joinArea .joinForm .joinBox input {
+  width: 100%;
+  height: 40%;
+  border: 0.2rem solid #111;
+  border-radius: 2vh;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.joinArea .joinForm .joinButton, .joinArea .joinForm .loginPage .loginArea .loginForm .buttonArea .findButton, .loginPage .loginArea .loginForm .buttonArea .joinArea .joinForm .findButton {
+  width: 30%;
+  height: 10%;
+  color: gray;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.joinArea .joinForm .joinButton:hover, .joinArea .joinForm .loginPage .loginArea .loginForm .buttonArea .findButton:hover, .loginPage .loginArea .loginForm .buttonArea .joinArea .joinForm .findButton:hover {
+  color: #111;
+  -webkit-transform: scale(150%);
+          transform: scale(150%);
+}
+
+.joinArea .backIcon {
+  background-image: url("./back.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 4rem;
+  height: 4rem;
+  -webkit-filter: invert(100%);
+          filter: invert(100%);
+  color: white;
+  position: absolute;
+  top: 5%;
+  right: none;
+  left: 5%;
+  bottom: none;
+  -webkit-transform: none;
+          transform: none;
+  cursor: pointer;
+}
+
 .loginPage {
   width: 100vw;
   height: 100vh;

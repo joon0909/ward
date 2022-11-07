@@ -42,10 +42,25 @@ const LoginPage = (props)=>{
         // window.location.href = "/main";
         navigate("/main"); //네비게이터 사용
       }else{
-        //
         console.log(response.data)
+        $(".loginFailMessage").css({"display":"flex"});
+        setTimeout(()=>{
+          $(".loginFailMessage").css({"display":"none"});
+        }, 1000)
       }
     });
+  }
+  const phoneNumCheck = (e)=>{
+    console.log(typeof parseInt(e.key))
+    console.log(parseInt(e.key))
+     
+    if(!(0<=parseInt(e.key) && parseInt(e.key)<=9)){
+      $("#joinPhone").val("");
+    }
+  }
+  const joinSubmit = (e)=>{
+    e.preventDefault();
+
   }
   return (
     <>
@@ -66,6 +81,36 @@ const LoginPage = (props)=>{
               <div className="joinButton">회원가입</div>
               <div className="findButton">회원정보 찾기</div>
             </div>
+          </form>
+        </article>
+        <article className="loginFailMessage">
+          <p>입력된 회원 정보에 일치하는 회원이 없습니다.</p>
+        </article>
+        <article className="joinArea">
+          <div className="backIcon"></div>
+          <form className="joinForm" onSubmit={joinSubmit}>
+            <h1>WARD</h1>
+            <div className="joinBox">
+              <label for="joinId">ID</label>
+              <input type="text" maxLength="8" id="joinId" autoComplete="0"></input>
+            </div>
+            <div className="joinBox">
+              <label for="joinPass">PASS</label>
+              <input type="password" maxLength="8" id="joinPass" autoComplete="0"></input>
+            </div>
+            <div className="joinBox">
+              <label for="joinName">이름</label>
+              <input type="text" id="joinName" autoComplete="0"></input>
+            </div>
+            <div className="joinBox">
+              <label for="joinPhone">휴대전화</label>
+              <input type="text" id="joinPhone" maxLength="11" autoComplete="0" onKeyUp={phoneNumCheck}></input>
+            </div>
+            <div className="joinBox">
+              <label for="joinEmail">이메일</label>
+              <input type="text" id="joinEmail" autoComplete="0"></input>
+            </div>
+            <button className="joinButton" onClick={joinSubmit}>회원가입</button>
           </form>
         </article>
       </section>
