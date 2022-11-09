@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./css/mainPage.css";
 import axios, { Axios } from "axios";
 import $ from "jquery";
+import {useNavigate} from "react-router-dom"; 
 const intro = ()=>{
   $(".stick:nth-child(odd)").css({"transform":"translateY(-150vh)"});
   $(".stick:nth-child(even)").css({"transform":"translateY(150vh)"});
@@ -33,13 +34,18 @@ const menuTextOut = (e)=>{
   $(".menuText").css("color", "#111"); 
   $(".menuBackText").css({"opacity":"0"});
 }
+const logoutClick = (e)=>{
+  window.location.href = "/";
+}
 const MainPage = ()=>{
   setTimeout(()=>{
     intro();
     setTimeout(()=>{
       $(".introArea").css({"display":"none"});
+      $(".userDataArea").css("right", "3%");
     }, 1000);
   }, 700);
+  const navigate = useNavigate();
   return (
     <>
       <section className="mainPage">
@@ -54,6 +60,10 @@ const MainPage = ()=>{
         <article className="mainArea">
           <header className="headerArea">
             <h1 className="citeTitle">WARD</h1>
+            <div className="userDataArea">
+              <div className="userNameText">준영님 환영합니다.</div>
+              <div className="logoutButton" onClick={logoutClick}>Logout</div>
+            </div>
           </header>
           <main className="mainContent">
             <div className="myNameText">
@@ -65,7 +75,8 @@ const MainPage = ()=>{
             </div>
             <ul className="menuArea">
               <h1 className="menuBackText">TEST</h1>
-              <li className="menuText" id="menuText1" onMouseEnter={menuTextHover} onMouseOut={menuTextOut}>
+              <li className="menuText" id="menuText1" onMouseEnter={menuTextHover} onMouseOut={menuTextOut} onClick={()=>{
+                navigate("/post");}}>
                 01.<br></br>
                 POST
               </li>

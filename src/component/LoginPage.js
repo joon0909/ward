@@ -58,6 +58,85 @@ const LoginPage = (props)=>{
       $("#joinPhone").val("");
     }
   }
+  const tabMenuClick = (e)=>{
+    $(".tabMenu").removeClass("selectFindTab");
+    switch(e.target.id){
+      case "findIdTab":
+        $("#findIdTab").addClass("selectFindTab");
+        $(".findIdForm").css({"display":"flex"});
+        $(".findPassForm").css({"display":"none"});
+        break;
+      case "findPassTab":
+        $("#findPassTab").addClass("selectFindTab"); 
+        $(".findPassForm").css({"display":"flex"});
+        $(".findIdForm").css({"display":"none"});
+        break;
+      default:
+        break;
+    }
+  }
+  const findIdSubmit = (e)=>{
+    e.preventDefault();
+    let body = {
+      findName : $(".findIdForm #findName").val(),
+      findEmail : $(".findIdForm #findEmail").val()
+    }
+    console.log(body)
+    axios({
+      url:"/findId",
+      method:"post",
+      data:body
+    }).then((response)=>{
+      console.log(response.data)
+      switch(response.data.check){
+        case "findfail":
+          $(".findFailText").text(response.data.message);
+          $(".findFailMessage").css("display", "flex");
+          break;
+        case "notuser":
+          $(".findFailText").text(response.data.message);
+          $(".findFailMessage").css("display", "flex");
+          break;
+        case "findsuccess":
+          $(".findFailText").text("ID : "+response.data.result['userId']);
+          $(".findFailMessage").css("display", "flex");
+          break;
+        default:
+          break;
+      }
+    });
+  }
+  const findPassSubmit = (e)=>{
+    e.preventDefault();
+    let body = {
+      findId : $(".findPassForm #findId").val(),
+      findName : $(".findPassForm #findName").val(),
+      findEmail : $(".findPassForm #findEmail").val()
+    }
+    axios({
+      url:"/findPass",
+      method:"post",
+      data:body
+    }).then((response)=>{
+      console.log(response.data);
+      switch(response.data.check){
+        case "findfail":
+          $(".findFailText").text(response.data.message);
+          $(".findFailMessage").css("display", "flex");
+          break;
+        case "notuser":
+          $(".findFailText").text(response.data.message);
+          $(".findFailMessage").css("display", "flex");
+          break;
+        case "findsuccess":
+          $(".findFailText").text("PASS : "+response.data.result['userPass']);
+          $(".findFailMessage").css("display", "flex");
+          break;
+        default:
+          break;
+      } 
+    });
+  }
   const joinSubmit = (e)=>{
     e.preventDefault();
     console.log($("#joinId").val());
@@ -105,8 +184,17 @@ const LoginPage = (props)=>{
   const joinClick = (e)=>{
     $(".joinArea").css({"transform":"translateX(0)"});
   }
+  const findClick = (e)=>{
+    $(".findArea").css({"transform":"translateX(0)"});
+  }
   const backMain = (e)=>{
     $(".joinArea").css({"transform":"translateX(100%)"});
+  }
+  const findBack = (e)=>{
+    $(".findArea").css({"transform":"translateX(-100%)"});
+  }
+  const findExit = (e)=>{
+    $(".findFailMessage").css("display", "none");
   }
   return (
     <>
@@ -125,7 +213,7 @@ const LoginPage = (props)=>{
             </div>
             <div className="buttonArea">
               <div className="joinButton" onClick={joinClick}>회원가입</div>
-              <div className="findButton">회원정보 찾기</div>
+              <div className="findButton" onClick={findClick}>회원정보 찾기</div>
             </div>
           </form>
         </article>
@@ -138,11 +226,11 @@ const LoginPage = (props)=>{
             <h1>WARD</h1>
             <div className="joinBox">
               <label for="joinId">ID</label>
-              <input type="text" maxLength="8" id="joinId" autoComplete="0"></input>
+              <input type="text" maxLength="8" minlength="4" id="joinId" autoComplete="0"></input>
             </div>
             <div className="joinBox">
               <label for="joinPass">PASS</label>
-              <input type="password" maxLength="8" id="joinPass" autoComplete="0"></input>
+              <input type="password" maxLength="8" minlength="4" id="joinPass" autoComplete="0"></input>
             </div>
             <div className="joinBox">
               <label for="joinName">이름</label>
@@ -158,6 +246,49 @@ const LoginPage = (props)=>{
             </div>
             <button className="joinButton" onClick={joinSubmit}>회원가입</button>
           </form>
+        </article>
+        <article className="findFailMessage">
+          <p className="findFailText"></p>
+          <div className="findExit" onClick={findExit}>확인</div>
+        </article>
+        <article className="findArea">
+          <div className="findBackIcon" onClick={findBack}></div>
+          <div className="findCont">
+            <div className="findTabMenu">
+              <div id="findIdTab" className="tabMenu selectFindTab" onClick={tabMenuClick}>아이디 찾기</div>
+              <div id="findPassTab" className="tabMenu" onClick={tabMenuClick}>비밀번호 찾기</div>
+            </div>
+            <form className="findIdForm" onSubmit={findIdSubmit}>
+              <div className="findBox">
+                <label for="findName">이름</label>
+                <input type="text" id="findName" autoComplete="0"></input>
+              </div> 
+              <div className="findBox">
+                <label for="findEmail">이메일</label>
+                <input type="text" id="findEmail" autoComplete="0"></input>
+              </div> 
+              <div className="findIdSubmit" onClick={findIdSubmit}>
+                아이디 찾기
+              </div>
+            </form>
+            <form className="findPassForm" onSubmit={findPassSubmit}>
+              <div className="findBox">
+                <label for="findId">ID</label>
+                <input type="text" maxLength="8" minlength="4" id="findId" autoComplete="0"></input>
+              </div>
+              <div className="findBox">
+                <label for="findName">이름</label>
+                <input type="text" id="findName" autoComplete="0"></input>
+              </div> 
+              <div className="findBox">
+                <label for="findEmail">이메일</label>
+                <input type="text" id="findEmail" autoComplete="0"></input>
+              </div> 
+              <div className="findPassSubmit" onClick={findPassSubmit}>
+                비밀번호 찾기
+              </div> 
+            </form>
+          </div>
         </article>
       </section>
     </>

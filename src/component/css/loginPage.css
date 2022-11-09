@@ -91,6 +91,58 @@ table, thead, tbody, th, td {
   pointer-events: none;
 }
 
+.findFailMessage {
+  width: 30%;
+  height: 25%;
+  border-radius: 10vh;
+  background-color: white;
+  border: 0.2rem solid #111;
+  position: absolute;
+  top: 50%;
+  right: none;
+  left: 50%;
+  bottom: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  z-index: 1000;
+  -webkit-box-shadow: 0rem 0rem 0.2rem 0.1rem white;
+          box-shadow: 0rem 0rem 0.2rem 0.1rem white;
+}
+
+.findFailMessage p {
+  color: #111;
+  font-size: 1.2rem;
+  pointer-events: none;
+  margin: 2rem;
+}
+
+.findFailMessage div {
+  color: gray;
+  width: 100%;
+  height: 10%;
+  margin: 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.findFailMessage div:hover {
+  -webkit-transform: scale(140%);
+          transform: scale(140%);
+  color: #111;
+}
+
 .joinArea {
   width: 100vw;
   height: 100vh;
@@ -459,4 +511,236 @@ table, thead, tbody, th, td {
   -webkit-transform: scale(140%);
           transform: scale(140%);
   color: #111;
+}
+
+.findArea {
+  width: 100vw;
+  height: 100vh;
+  background-color: #111;
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+}
+
+.findArea .findBackIcon {
+  background-image: url("./back.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 4rem;
+  height: 4rem;
+  -webkit-filter: invert(100%);
+          filter: invert(100%);
+  color: white;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  left: none;
+  bottom: none;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+  cursor: pointer;
+}
+
+.findArea .findCont {
+  position: absolute;
+  top: 50%;
+  right: none;
+  left: 50%;
+  bottom: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 40%;
+  height: 50%;
+  background-color: white;
+  border-radius: 2vh;
+  overflow: hidden;
+}
+
+.findArea .findCont .findTabMenu {
+  width: 100%;
+  height: 15%;
+  background-color: #bdbdbd;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.findArea .findCont .findTabMenu .tabMenu {
+  width: 20%;
+  height: 100%;
+  background-color: #bdbdbd;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.findArea .findCont .findTabMenu .selectFindTab {
+  background-color: white;
+  color: #111;
+}
+
+.findArea .findCont .findIdForm {
+  width: 100%;
+  height: 85%;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.findArea .findCont .findIdForm .findBox {
+  margin: auto;
+  width: 80%;
+  height: 30%;
+}
+
+.findArea .findCont .findIdForm .findBox label {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  text-align: left;
+}
+
+.findArea .findCont .findIdForm .findBox input {
+  width: 100%;
+  height: 40%;
+  border: 0.2rem solid #111;
+  border-radius: 2vh;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.findArea .findCont .findIdForm .findBox:first-child {
+  margin-top: 2rem;
+}
+
+.findArea .findCont .findIdForm .findIdSubmit {
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  text-align: center;
+  font-size: 1.4rem;
+  height: 30%;
+  width: 100%;
+  color: gray;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.findArea .findCont .findIdForm .findIdSubmit:hover {
+  color: #111;
+  -webkit-transform: scale(130%);
+          transform: scale(130%);
+}
+
+.findArea .findCont .findPassForm {
+  width: 100%;
+  height: 85%;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: none;
+}
+
+.findArea .findCont .findPassForm .findBox {
+  margin: auto;
+  width: 80%;
+  height: 30%;
+}
+
+.findArea .findCont .findPassForm .findBox label {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 0.7rem;
+  margin-left: 1rem;
+  text-align: left;
+}
+
+.findArea .findCont .findPassForm .findBox input {
+  width: 100%;
+  height: 40%;
+  border: 0.2rem solid #111;
+  border-radius: 2vh;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.findArea .findCont .findPassForm .findBox:first-child {
+  margin-top: 1rem;
+}
+
+.findArea .findCont .findPassForm .findPassSubmit {
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  text-align: center;
+  font-size: 1.4rem;
+  height: 30%;
+  width: 100%;
+  color: gray;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.findArea .findCont .findPassForm .findPassSubmit:hover {
+  color: #111;
+  -webkit-transform: scale(130%);
+          transform: scale(130%);
 }

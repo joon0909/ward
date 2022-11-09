@@ -14,6 +14,8 @@ var path = require("path"); //pat(경로)설정을 위한 path 요청
 var bodyParser = require("body-parser"); //post 방식 사용을 위한 바디파서 요청
 
 
+var cookieParser = require("cookie-parser");
+
 app.use(express.json()); //바디 파서 사용시 json 사용을 위함. 바디파서 필수 선언1
 
 app.use(express.urlencoded({
@@ -39,6 +41,12 @@ app.post("/loginCheck", function (req, res) {
     dbCon.query(sqlStr, function (err, result) {
       if (result.length != 0) {
         if (result[0].w_pass == req.body.pass) {
+          //여기 쿠키 넘기기
+          res.cookie('ward_cookie', {
+            userName: result[0].w_name
+          }, {
+            maxAge: 1000 * 60 * 20
+          });
           res.send({
             check: "success",
             message: "".concat(req.body.id, "\uB2D8 \uD658\uC601\uD569\uB2C8\uB2E4.")
@@ -100,7 +108,83 @@ app.post("/join", function (req, res) {
     });
   }
 });
+app.post("/findId", function (req, res) {
+  if (req.body['findName'].length == 0 || req.body['findEmail'].length == 0) {
+    var emptyKey = [];
+
+    for (var key in req.body) {
+      if (req.body[key].length == 0) {
+        emptyKey.push(key);
+      }
+    }
+
+    res.send({
+      check: "findfail",
+      message: "입력되지 않은 데이터가 있습니다."
+    });
+  } else {
+    var sqlStr = "select w_id from WARD_USER where w_name ='" + req.body['findName'] + "' and w_email = '" + req.body['findEmail'] + "'";
+    dbCon.query(sqlStr, function (err, result) {
+      console.log(result.length);
+
+      if (result.length >= 1) {
+        res.send({
+          check: "findsuccess",
+          message: "정보 조회 성공",
+          result: {
+            userId: result[0].w_id
+          }
+        });
+      } else {
+        res.send({
+          check: "notuser",
+          message: "입력한 정보와 일치하는 회원이 없습니다."
+        });
+      }
+    });
+  }
+});
+app.post("/findPass", function (req, res) {
+  if (req.body['findName'].length == 0 || req.body['findEmail'].length == 0 || req.body['findId'].length == 0) {
+    var emptyKey = [];
+
+    for (var key in req.body) {
+      if (req.body[key].length == 0) {
+        emptyKey.push(key);
+      }
+    }
+
+    res.send({
+      check: "findfail",
+      message: "입력되지 않은 데이터가 있습니다."
+    });
+  } else {
+    var sqlStr = "select w_pass from WARD_USER where w_name ='" + req.body['findName'] + "' and w_email = '" + req.body['findEmail'] + "' and w_id = '" + req.body['findId'] + "'";
+    dbCon.query(sqlStr, function (err, result) {
+      console.log(result.length);
+
+      if (result.length >= 1) {
+        res.send({
+          check: "findsuccess",
+          message: "정보 조회 성공",
+          result: {
+            userPass: result[0].w_pass
+          }
+        });
+      } else {
+        res.send({
+          check: "notuser",
+          message: "입력한 정보와 일치하는 회원이 없습니다."
+        });
+      }
+    });
+  }
+});
 app.listen(3000, function (err) {
   if (err) throw err;
   console.log("3000 port connect");
+});
+app.listen(3001, function (err) {
+  if (err) throw err;
+  console.log("3001 port connect");
 });

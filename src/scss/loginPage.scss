@@ -20,6 +20,40 @@
     pointer-events: none;
   }
 }
+.findFailMessage{
+  width: 30%;
+  height: 25%;
+  border-radius: 10vh;
+  background-color: white;
+  border: 0.2rem solid #111;
+  @include positionSetting(absolute, 50%, none, none, 50%, translate(-50%, -50%));
+  // display: flex;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  box-shadow: 0rem 0rem 0.2rem 0.1rem white;
+  p{
+    color: #111;
+    font-size: 1.2rem; 
+    pointer-events: none;
+    margin: 2rem;
+  } 
+  div{
+    color: gray;
+    width: 100%;
+    height: 10%;
+    margin: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    &:hover{
+      transform: scale(140%);
+      color: #111;
+    }
+  }
+}
 .joinArea{
   width: 100vw;
   height: 100vh;
@@ -244,5 +278,138 @@
         }
       }
     }
+  }
+}
+.findArea{
+  width: 100vw;
+  height: 100vh;
+  background-color: #111;
+  transform: translateX(-100%);
+  transition: all 0.8s ease;
+  .findBackIcon{
+    background-image: url("./back.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 4rem;
+    height: 4rem;
+    filter: invert(100%);
+    color: white;
+    @include positionSetting(absolute, 5%, 5%, none, none, rotate(180deg));
+    cursor: pointer; 
+  }
+  .findCont{
+    @include positionSetting(absolute, 50%, none, none, 50%, translate(-50%, -50%));
+    width: 40%;
+    height: 50%;
+    background-color: white;
+    border-radius: 2vh;
+    overflow: hidden;
+    .findTabMenu{
+      width: 100%;
+      height: 15%;
+      background-color: rgb(189, 189, 189);
+      display: flex;
+      .tabMenu{
+        width: 20%;
+        height: 100%;
+        background-color: rgb(189, 189, 189);
+        color: white;
+        @include flexSetting(row, center, center);
+        cursor: pointer; 
+      }
+      .selectFindTab{
+        background-color: white;
+        color: #111;
+      }
+    }
+    .findIdForm{
+      width: 100%;
+      height: 85%;
+      position: relative;
+      @include flexSetting(column, space-around, center);
+      .findBox{
+        margin:auto;
+        width: 80%;
+        height: 30%;
+        label{
+          display: block;
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+          margin-left: 1rem;
+          text-align: left;
+        }
+        input{
+          width: 100%;
+          height: 40%;
+          border: 0.2rem solid #111;
+          border-radius: 2vh;
+          text-align: center;
+          font-size: 1.5rem;
+        }
+      }
+      .findBox:first-child{
+        margin-top: 2rem;
+      }
+      .findIdSubmit{
+        transition: all 0.4s ease;
+        text-align: center;
+        font-size: 1.4rem;
+        height: 30%;
+        width: 100%;
+        color: gray;
+        cursor: pointer;
+        &:hover{
+          color: #111;
+          transform: scale(130%);
+        }
+        @include flexSetting(row, center, center);
+      }
+    }
+    .findPassForm{
+      width: 100%;
+      height: 85%;
+      position: relative;
+      @include flexSetting(column, space-around, center);
+      display: none;
+      .findBox{
+        margin:auto;
+        width: 80%;
+        height: 30%;
+        label{
+          display: block;
+          font-size: 1.5rem;
+          margin-bottom: 0.7rem;
+          margin-left: 1rem;
+          text-align: left;
+        }
+        input{
+          width: 100%;
+          height: 40%;
+          border: 0.2rem solid #111;
+          border-radius: 2vh;
+          text-align: center;
+          margin-bottom: 0.5rem;
+          font-size: 1.5rem;
+        }
+      }
+      .findBox:first-child{
+        margin-top: 1rem;
+      }
+      .findPassSubmit{
+        transition: all 0.4s ease;
+        text-align: center;
+        font-size: 1.4rem;
+        height: 30%;
+        width: 100%;
+        color: gray;
+        cursor: pointer;
+        &:hover{
+          color: #111;
+          transform: scale(130%);
+        }
+        @include flexSetting(row, center, center);
+      }
+    } 
   }
 }
