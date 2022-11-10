@@ -43,9 +43,9 @@ app.post("/loginCheck", function (req, res) {
         if (result[0].w_pass == req.body.pass) {
           //여기 쿠키 넘기기
           res.cookie('ward_cookie', {
-            userName: result[0].w_name
+            userId: result[0].w_id
           }, {
-            maxAge: 1000 * 60 * 20
+            maxAge: 1000 * 60 * 60
           });
           res.send({
             check: "success",
@@ -180,11 +180,30 @@ app.post("/findPass", function (req, res) {
     });
   }
 });
+app.post("/postList", function (req, res) {
+  var sqlStr = "select * from WARD_FRIEND where wf_user = \"".concat(req.body.userId, "\"");
+  dbCon.query(sqlStr, function (err, result) {
+    var friendArr = [];
+    result.forEach(function (v, i, a) {
+      friendArr.push(v.wf_target);
+    });
+    var tempStr = "'".concat(req.body.userId, "', ");
+    friendArr.forEach(function (v, i, a) {
+      if (i == friendArr.length - 1) {
+        tempStr += "'" + v + "'";
+      } else {
+        tempStr += "'" + v + "', ";
+      }
+    });
+    sqlStr = "select * from WARD_POST where wp_writer in (".concat(tempStr, ")");
+    dbCon.query(sqlStr, function (err, result) {
+      res.send({
+        friendData: result
+      });
+    });
+  });
+});
 app.listen(3000, function (err) {
   if (err) throw err;
   console.log("3000 port connect");
-});
-app.listen(3001, function (err) {
-  if (err) throw err;
-  console.log("3001 port connect");
 });

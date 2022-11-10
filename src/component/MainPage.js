@@ -46,6 +46,8 @@ const MainPage = ()=>{
     }, 1000);
   }, 700);
   const navigate = useNavigate();
+  let cookieText = decodeURIComponent(document.cookie) 
+  let cookieUserId = cookieText.slice(cookieText.indexOf("userId")+9, cookieText.length-2);
   return (
     <>
       <section className="mainPage">
@@ -61,7 +63,7 @@ const MainPage = ()=>{
           <header className="headerArea">
             <h1 className="citeTitle">WARD</h1>
             <div className="userDataArea">
-              <div className="userNameText">준영님 환영합니다.</div>
+              <div className="userNameText">{cookieUserId}님 환영합니다.</div>
               <div className="logoutButton" onClick={logoutClick}>Logout</div>
             </div>
           </header>

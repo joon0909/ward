@@ -25,8 +25,8 @@ app.post("/loginCheck", (req, res)=>{
         if(result[0].w_pass == req.body.pass){
           //여기 쿠키 넘기기
           res.cookie('ward_cookie', {
-            userName: result[0].w_name
-          }, {maxAge: (1000 * 60 * 20)});
+            userId: result[0].w_id
+          }, {maxAge: (1000 * 60 * 60)});
           res.send({
             check: "success",
             message: `${req.body.id}님 환영합니다.`
@@ -153,11 +153,30 @@ app.post("/findPass", (req, res)=>{
     });
   } 
 });
+app.post("/postList", (req, res)=>{
+  let sqlStr = `select * from WARD_FRIEND where wf_user = "${req.body.userId}"`;
+  dbCon.query(sqlStr, (err, result)=>{
+    let friendArr = [];
+    result.forEach((v, i, a)=>{
+      friendArr.push(v.wf_target);
+    });
+    let tempStr = `'${req.body.userId}', `;
+    friendArr.forEach((v, i, a)=>{
+      if(i == friendArr.length-1){
+        tempStr+="'"+v+"'";
+      }else{
+        tempStr+="'"+v+"', ";
+      }
+    });
+    sqlStr = `select * from WARD_POST where wp_writer in (${tempStr})`;
+    dbCon.query(sqlStr, (err, result)=>{
+      res.send({
+        friendData: result
+      });
+    });
+  });
+})
 app.listen(3000, (err)=>{
   if(err) throw err;
   console.log("3000 port connect");
 });
-app.listen(3001, (err)=>{
-  if(err) throw err;
-  console.log("3001 port connect"); 
-})
